@@ -5,7 +5,7 @@ import pygame
 pygame.init()
 
 # Load image
-img = pygame.image.load(r"D:\deadline\f03ac0c34cedeab3b3fc.jpg")
+img = pygame.image.load(r"C:\Users\Admin\Downloads\Stem-main\f03ac0c34cedeab3b3fc.jpg")
 
 box1 = pygame.Rect(580, 150, 400, 75)
 box2 = pygame.Rect(495, 230, 500, 230)
@@ -19,6 +19,8 @@ chon.pack(pady=5)
 ds = ttk.Combobox(root, values=["Thầy", "Cô"], state="readonly")
 ds.pack(pady=5)
 ds.current(0)
+
+
 
 frame = tk.Frame(root)
 frame.pack(pady=5)
@@ -39,6 +41,12 @@ loichuc.pack(pady=5)
 nhaploichuc = tk.Entry(root, width=40)
 nhaploichuc.pack(pady=5)
 
+ex = ttk.Combobox(root, values=["NONE","1", "2"], state="readonly")
+ex.place(x=310,y=175,width=15)
+
+
+fi=open("loichuc.txt",'r')
+l=fi.read().splitlines()
 
 run = False
 screen = None
@@ -52,13 +60,15 @@ def submit_greeting():
      chontc = ds.get()
      tengv = nhapten.get().strip()
      loichucs = nhaploichuc.get().strip()
-
+     if ex.get()!="NONE" : loichucs=ex.get()
      if not tengv or not loichucs:
           messagebox.showerror("Lỗi","Lỗi")
      else:
           messagebox.showinfo("Thành công", "Thành công")
           texta = f"{chontc} {tengv}"
-          print(texta)
+          #print(texta)
+          for i in range(len(l)):
+               if loichucs==str(i+1): loichucs=l[i]
           lc = loichucs
           chay.config(state=tk.NORMAL)
 def toggle_pygame():
@@ -84,19 +94,19 @@ def toggle_pygame():
 
 def tudongdieuchin(texta, ronghop, sizeto=45, sizenho=10):
      size = sizeto
-     font = pygame.font.Font("D:\deadline\SedgwickAve-Regular.ttf", size)
+     font = pygame.font.Font(r"C:\Users\Admin\Downloads\Stem-main\SedgwickAve-Regular.ttf", size)
      dai, _ = font.size(texta)
 
      while dai > ronghop and size > sizenho:
           size -= 1
-          font = pygame.font.Font("D:\deadline\SedgwickAve-Regular.ttf", size)
+          font = pygame.font.Font(r"C:\Users\Admin\Downloads\Stem-main\SedgwickAve-Regular.ttf", size)
           dai, _ = font.size(texta)
 
      return font
 
 def tudongngatdong(lc, ronghop, box_height, sizeto=25, sizenho=10):
      size = sizeto
-     font = pygame.font.Font("D:\deadline\SedgwickAve-Regular.ttf", size)
+     font = pygame.font.Font(r"C:\Users\Admin\Downloads\Stem-main\SedgwickAve-Regular.ttf", size)
 
      while True:
           chu = lc.split(' ')
